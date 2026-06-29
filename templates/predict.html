@@ -1,0 +1,162 @@
+{% extends "base.html" %}
+
+{% block title %}Predict - Credit Card Approval{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="text-center mb-4">
+        <h2><i class="bi bi-search me-2"></i>Credit Card Approval Prediction</h2>
+        <p class="text-muted">Enter applicant details to predict approval status</p>
+    </div>
+
+    {% if error %}
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{ error }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+    {% endif %}
+
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <form id="predictionForm" method="POST" action="{{ url_for('predict') }}" class="prediction-form">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label">Gender</label>
+                        <select name="gender" class="form-select" data-validate="required">
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                        <div class="invalid-feedback"></div>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Age</label>
+                        <input type="number" name="age" class="form-control" value="30"
+                               data-validate="required|number|min:18|max:100" min="18" max="100">
+                        <div class="invalid-feedback"></div>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Annual Income ($)</label>
+                        <input type="number" name="annual_income" class="form-control" value="50000"
+                               data-validate="required|number|min:0" min="0" step="1000">
+                        <div class="invalid-feedback"></div>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Employment Status</label>
+                        <select name="employment_status" class="form-select" data-validate="required">
+                            <option value="Employed">Employed</option>
+                            <option value="Self-Employed">Self-Employed</option>
+                            <option value="Unemployed">Unemployed</option>
+                            <option value="Retired">Retired</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Years of Employment</label>
+                        <input type="number" name="years_of_employment" class="form-control" value="5"
+                               data-validate="required|number|min:0|max:50" min="0" max="50" step="0.5">
+                        <div class="invalid-feedback"></div>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Education Level</label>
+                        <select name="education_level" class="form-select" data-validate="required">
+                            <option value="High School">High School</option>
+                            <option value="Bachelor" selected>Bachelor</option>
+                            <option value="Master">Master</option>
+                            <option value="PhD">PhD</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Marital Status</label>
+                        <select name="marital_status" class="form-select" data-validate="required">
+                            <option value="Single">Single</option>
+                            <option value="Married">Married</option>
+                            <option value="Divorced">Divorced</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Number of Dependents</label>
+                        <input type="number" name="number_of_dependents" class="form-control" value="0"
+                               data-validate="required|number|min:0|max:10" min="0" max="10">
+                        <div class="invalid-feedback"></div>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Existing Loan Amount ($)</label>
+                        <input type="number" name="existing_loan_amount" class="form-control" value="0"
+                               data-validate="required|number|min:0" min="0" step="100">
+                        <div class="invalid-feedback"></div>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Monthly Income ($)</label>
+                        <input type="number" name="monthly_income" class="form-control" value="4000"
+                               data-validate="required|number|min:0" min="0" step="100">
+                        <div class="invalid-feedback"></div>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Credit Score</label>
+                        <input type="number" name="credit_score" class="form-control" value="650"
+                               data-validate="required|number|min:300|max:850" min="300" max="850">
+                        <div class="invalid-feedback"></div>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Loan Status</label>
+                        <select name="loan_status" class="form-select" data-validate="required">
+                            <option value="None" selected>None</option>
+                            <option value="Active">Active</option>
+                            <option value="Closed">Closed</option>
+                            <option value="Default">Default</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Credit History</label>
+                        <select name="credit_history" class="form-select" data-validate="required">
+                            <option value="Good" selected>Good</option>
+                            <option value="Average">Average</option>
+                            <option value="Poor">Poor</option>
+                            <option value="No History">No History</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Number of Credit Inquiries</label>
+                        <input type="number" name="number_of_credit_inquiries" class="form-control" value="1"
+                               data-validate="required|number|min:0|max:20" min="0" max="20">
+                        <div class="invalid-feedback"></div>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Debt-to-Income Ratio</label>
+                        <input type="number" name="debt_to_income_ratio" class="form-control" value="0.3"
+                               data-validate="required|number|min:0|max:1" min="0" max="1" step="0.01">
+                        <div class="invalid-feedback"></div>
+                    </div>
+                </div>
+
+                <div class="text-center mt-4">
+                    <button type="submit" class="btn btn-primary btn-predict me-2">
+                        <i class="bi bi-lightning me-1"></i>Predict
+                    </button>
+                    <button type="button" id="resetBtn" class="btn btn-outline-secondary btn-reset">
+                        <i class="bi bi-arrow-counterclockwise me-1"></i>Reset
+                    </button>
+                </div>
+            </form>
+
+            {% if result %}
+            <div id="resultBox" class="result-box {% if result == 'Approved' %}result-approved{% else %}result-rejected{% endif %}">
+                <h3>
+                    {% if result == 'Approved' %}
+                    <i class="bi bi-check-circle me-2"></i>Approved
+                    {% else %}
+                    <i class="bi bi-x-circle me-2"></i>Rejected
+                    {% endif %}
+                </h3>
+                <p class="probability">Prediction Probability: <strong>{{ probability }}%</strong></p>
+                <p class="small mt-2 opacity-75">Model: {{ best_model }}</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/validation.js') }}"></script>
+{% endblock %}

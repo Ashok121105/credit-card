@@ -1,0 +1,255 @@
+{
+  "models": [
+    {
+      "model_name": "Logistic Regression",
+      "accuracy": 0.79,
+      "precision": 0.7812,
+      "recall": 0.3086,
+      "f1_score": 0.4425,
+      "roc_auc": 0.7012,
+      "confusion_matrix": [
+        [
+          212,
+          7
+        ],
+        [
+          56,
+          25
+        ]
+      ],
+      "classification_report": {
+        "0": {
+          "precision": 0.7910447761194029,
+          "recall": 0.9680365296803652,
+          "f1-score": 0.8706365503080082,
+          "support": 219.0
+        },
+        "1": {
+          "precision": 0.78125,
+          "recall": 0.30864197530864196,
+          "f1-score": 0.4424778761061947,
+          "support": 81.0
+        },
+        "accuracy": 0.79,
+        "macro avg": {
+          "precision": 0.7861473880597014,
+          "recall": 0.6383392524945036,
+          "f1-score": 0.6565572132071015,
+          "support": 300.0
+        },
+        "weighted avg": {
+          "precision": 0.7884001865671642,
+          "recall": 0.79,
+          "f1-score": 0.7550337082735186,
+          "support": 300.0
+        }
+      }
+    },
+    {
+      "model_name": "Decision Tree",
+      "accuracy": 0.7067,
+      "precision": 0.4386,
+      "recall": 0.3086,
+      "f1_score": 0.3623,
+      "roc_auc": 0.6339,
+      "confusion_matrix": [
+        [
+          187,
+          32
+        ],
+        [
+          56,
+          25
+        ]
+      ],
+      "classification_report": {
+        "0": {
+          "precision": 0.7695473251028807,
+          "recall": 0.8538812785388128,
+          "f1-score": 0.8095238095238095,
+          "support": 219.0
+        },
+        "1": {
+          "precision": 0.43859649122807015,
+          "recall": 0.30864197530864196,
+          "f1-score": 0.36231884057971014,
+          "support": 81.0
+        },
+        "accuracy": 0.7066666666666667,
+        "macro avg": {
+          "precision": 0.6040719081654754,
+          "recall": 0.5812616269237274,
+          "f1-score": 0.5859213250517599,
+          "support": 300.0
+        },
+        "weighted avg": {
+          "precision": 0.680190599956682,
+          "recall": 0.7066666666666667,
+          "f1-score": 0.6887784679089027,
+          "support": 300.0
+        }
+      }
+    },
+    {
+      "model_name": "Random Forest",
+      "accuracy": 0.7867,
+      "precision": 0.84,
+      "recall": 0.2593,
+      "f1_score": 0.3962,
+      "roc_auc": 0.7474,
+      "confusion_matrix": [
+        [
+          215,
+          4
+        ],
+        [
+          60,
+          21
+        ]
+      ],
+      "classification_report": {
+        "0": {
+          "precision": 0.7818181818181819,
+          "recall": 0.9817351598173516,
+          "f1-score": 0.8704453441295547,
+          "support": 219.0
+        },
+        "1": {
+          "precision": 0.84,
+          "recall": 0.25925925925925924,
+          "f1-score": 0.39622641509433965,
+          "support": 81.0
+        },
+        "accuracy": 0.7866666666666666,
+        "macro avg": {
+          "precision": 0.8109090909090909,
+          "recall": 0.6204972095383054,
+          "f1-score": 0.6333358796119472,
+          "support": 300.0
+        },
+        "weighted avg": {
+          "precision": 0.7975272727272728,
+          "recall": 0.7866666666666666,
+          "f1-score": 0.7424062332900466,
+          "support": 300.0
+        }
+      }
+    },
+    {
+      "model_name": "XGBoost",
+      "accuracy": 0.7933,
+      "precision": 0.7714,
+      "recall": 0.3333,
+      "f1_score": 0.4655,
+      "roc_auc": 0.7579,
+      "confusion_matrix": [
+        [
+          211,
+          8
+        ],
+        [
+          54,
+          27
+        ]
+      ],
+      "classification_report": {
+        "0": {
+          "precision": 0.7962264150943397,
+          "recall": 0.9634703196347032,
+          "f1-score": 0.871900826446281,
+          "support": 219.0
+        },
+        "1": {
+          "precision": 0.7714285714285715,
+          "recall": 0.3333333333333333,
+          "f1-score": 0.46551724137931033,
+          "support": 81.0
+        },
+        "accuracy": 0.7933333333333333,
+        "macro avg": {
+          "precision": 0.7838274932614555,
+          "recall": 0.6484018264840182,
+          "f1-score": 0.6687090339127957,
+          "support": 300.0
+        },
+        "weighted avg": {
+          "precision": 0.7895309973045822,
+          "recall": 0.7933333333333333,
+          "f1-score": 0.7621772584781988,
+          "support": 300.0
+        }
+      }
+    }
+  ],
+  "best_model": {
+    "model_name": "XGBoost",
+    "accuracy": 0.7933,
+    "precision": 0.7714,
+    "recall": 0.3333,
+    "f1_score": 0.4655,
+    "roc_auc": 0.7579,
+    "confusion_matrix": [
+      [
+        211,
+        8
+      ],
+      [
+        54,
+        27
+      ]
+    ],
+    "classification_report": {
+      "0": {
+        "precision": 0.7962264150943397,
+        "recall": 0.9634703196347032,
+        "f1-score": 0.871900826446281,
+        "support": 219.0
+      },
+      "1": {
+        "precision": 0.7714285714285715,
+        "recall": 0.3333333333333333,
+        "f1-score": 0.46551724137931033,
+        "support": 81.0
+      },
+      "accuracy": 0.7933333333333333,
+      "macro avg": {
+        "precision": 0.7838274932614555,
+        "recall": 0.6484018264840182,
+        "f1-score": 0.6687090339127957,
+        "support": 300.0
+      },
+      "weighted avg": {
+        "precision": 0.7895309973045822,
+        "recall": 0.7933333333333333,
+        "f1-score": 0.7621772584781988,
+        "support": 300.0
+      }
+    }
+  },
+  "dataset_info": {
+    "total_records": 1530,
+    "total_features": 15,
+    "approved_count": 1119,
+    "rejected_count": 411,
+    "missing_values": 60,
+    "duplicate_count": 30,
+    "columns": [
+      "Gender",
+      "Age",
+      "Annual_Income",
+      "Employment_Status",
+      "Years_of_Employment",
+      "Education_Level",
+      "Marital_Status",
+      "Number_of_Dependents",
+      "Existing_Loan_Amount",
+      "Monthly_Income",
+      "Credit_Score",
+      "Loan_Status",
+      "Credit_History",
+      "Number_of_Credit_Inquiries",
+      "Debt_to_Income_Ratio",
+      "Approval_Status"
+    ]
+  }
+}

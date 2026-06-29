@@ -1,0 +1,161 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - Credit Card Approval{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="text-center mb-4">
+        <h2><i class="bi bi-bar-chart me-2"></i>Analytics Dashboard</h2>
+        <p class="text-muted">Model performance metrics and dataset insights</p>
+        {% if best_model != 'N/A' %}
+        <span class="best-model-badge">Best Model: {{ best_model }}</span>
+        {% endif %}
+    </div>
+
+    {% if not metrics %}
+    <div class="alert alert-warning text-center">
+        <i class="bi bi-exclamation-triangle me-2"></i>
+        No metrics available. Run <code>python models/train_model.py</code> to generate charts and metrics.
+    </div>
+    {% else %}
+
+    <!-- Dataset Overview -->
+    <div class="row g-3 mb-4">
+        <div class="col-md-3">
+            <div class="stat-card">
+                <div class="stat-value">{{ metrics.dataset_info.total_records }}</div>
+                <div class="stat-label">Total Records</div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="stat-card">
+                <div class="stat-value">{{ metrics.dataset_info.total_features }}</div>
+                <div class="stat-label">Features</div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="stat-card">
+                <div class="stat-value text-success">{{ metrics.dataset_info.approved_count }}</div>
+                <div class="stat-label">Approved</div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="stat-card">
+                <div class="stat-value text-danger">{{ metrics.dataset_info.rejected_count }}</div>
+                <div class="stat-label">Rejected</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Model Comparison Table -->
+    <div class="card dashboard-card mb-4">
+        <div class="card-header"><i class="bi bi-table me-2"></i>Model Comparison</div>
+        <div class="card-body">
+            <table class="table table-striped metrics-table">
+                <thead>
+                    <tr>
+                        <th>Model</th>
+                        <th>Accuracy</th>
+                        <th>Precision</th>
+                        <th>Recall</th>
+                        <th>F1 Score</th>
+                        <th>ROC-AUC</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for m in metrics.models %}
+                    <tr>
+                        <td>
+                            {{ m.model_name }}
+                            {% if m.model_name == metrics.best_model.model_name %}
+                            <span class="badge bg-success ms-1">Best</span>
+                            {% endif %}
+                        </td>
+                        <td>{{ m.accuracy }}</td>
+                        <td>{{ m.precision }}</td>
+                        <td>{{ m.recall }}</td>
+                        <td>{{ m.f1_score }}</td>
+                        <td>{{ m.roc_auc }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Charts Row 1 -->
+    <div class="row g-4 mb-4">
+        <div class="col-md-6">
+            <div class="card dashboard-card">
+                <div class="card-header"><i class="bi bi-pie-chart me-2"></i>Class Distribution</div>
+                <div class="card-body">
+                    <img src="{{ url_for('static', filename='images/class_distribution.png') }}"
+                         alt="Class Distribution" class="chart-img"
+                         onerror="this.style.display='none'">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card dashboard-card">
+                <div class="card-header"><i class="bi bi-bar-chart-line me-2"></i>Accuracy Comparison</div>
+                <div class="card-body">
+                    <img src="{{ url_for('static', filename='images/accuracy_comparison.png') }}"
+                         alt="Accuracy Comparison" class="chart-img"
+                         onerror="this.style.display='none'">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Charts Row 2 -->
+    <div class="row g-4 mb-4">
+        <div class="col-md-6">
+            <div class="card dashboard-card">
+                <div class="card-header"><i class="bi bi-graph-up me-2"></i>Model Performance</div>
+                <div class="card-body">
+                    <img src="{{ url_for('static', filename='images/model_performance.png') }}"
+                         alt="Model Performance" class="chart-img"
+                         onerror="this.style.display='none'">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card dashboard-card">
+                <div class="card-header"><i class="bi bi-activity me-2"></i>ROC Curve (Best Model)</div>
+                <div class="card-body">
+                    {% set best_name = metrics.best_model.model_name.replace(' ', '_').lower() %}
+                    <img src="{{ url_for('static', filename='images/roc_curve_' + best_name + '.png') }}"
+                         alt="ROC Curve" class="chart-img"
+                         onerror="this.style.display='none'">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Charts Row 3 -->
+    <div class="row g-4 mb-4">
+        <div class="col-md-6">
+            <div class="card dashboard-card">
+                <div class="card-header"><i class="bi bi-grid me-2"></i>Confusion Matrix (Best Model)</div>
+                <div class="card-body">
+                    <img src="{{ url_for('static', filename='images/confusion_matrix_' + best_name + '.png') }}"
+                         alt="Confusion Matrix" class="chart-img"
+                         onerror="this.style.display='none'">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card dashboard-card">
+                <div class="card-header"><i class="bi bi-sort-down me-2"></i>Feature Importance (Best Model)</div>
+                <div class="card-body">
+                    <img src="{{ url_for('static', filename='images/feature_importance_' + best_name + '.png') }}"
+                         alt="Feature Importance" class="chart-img"
+                         onerror="this.style.display='none'">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% endif %}
+</div>
+{% endblock %}

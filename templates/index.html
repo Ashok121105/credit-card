@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Credit Card Approval Prediction{% endblock %}
+
+{% block content %}
+<section class="hero-section">
+    <div class="container text-center">
+        <h1><i class="bi bi-credit-card-2-front me-2"></i>Credit Card Approval Prediction</h1>
+        <p class="lead mt-3">Machine Learning powered system to predict credit card application outcomes</p>
+        <div class="mt-4">
+            <a href="{{ url_for('predict') }}" class="btn btn-light btn-lg me-2">
+                <i class="bi bi-search me-1"></i>Make Prediction
+            </a>
+            <a href="{{ url_for('dashboard') }}" class="btn btn-outline-light btn-lg">
+                <i class="bi bi-bar-chart me-1"></i>View Dashboard
+            </a>
+        </div>
+        {% if best_model != 'N/A' %}
+        <p class="mt-3 small opacity-75">Best Model: <span class="best-model-badge">{{ best_model }}</span></p>
+        {% endif %}
+    </div>
+</section>
+
+<div class="container">
+  <div class="row mb-5">
+        <div class="col-12 text-center mb-4">
+            <h2>Project Overview</h2>
+            <p class="text-muted">An end-to-end ML solution for automated credit card approval decisions</p>
+        </div>
+    </div>
+
+    <div class="row g-4 mb-5">
+        <div class="col-md-4">
+            <div class="card feature-card p-4">
+                <div class="feature-icon"><i class="bi bi-database"></i></div>
+                <h5>Data Preprocessing</h5>
+                <p class="text-muted">Complete pipeline including duplicate removal, missing value handling, encoding, scaling, outlier treatment, and feature engineering.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card feature-card p-4">
+                <div class="feature-icon"><i class="bi bi-cpu"></i></div>
+                <h5>Multiple ML Models</h5>
+                <p class="text-muted">Trains Logistic Regression, Decision Tree, Random Forest, and XGBoost classifiers with comprehensive evaluation metrics.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card feature-card p-4">
+                <div class="feature-icon"><i class="bi bi-globe"></i></div>
+                <h5>Web Application</h5>
+                <p class="text-muted">Professional Flask web app with prediction form, analytics dashboard, and REST API for real-time inference.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-5">
+        <div class="col-md-6">
+            <div class="card feature-card p-4">
+                <h5><i class="bi bi-check-circle text-success me-2"></i>Key Features</h5>
+                <ul class="list-unstyled mt-3">
+                    <li class="mb-2"><i class="bi bi-arrow-right text-primary me-2"></i>15 applicant input features</li>
+                    <li class="mb-2"><i class="bi bi-arrow-right text-primary me-2"></i>Automatic best model selection</li>
+                    <li class="mb-2"><i class="bi bi-arrow-right text-primary me-2"></i>ROC-AUC, F1, Precision, Recall metrics</li>
+                    <li class="mb-2"><i class="bi bi-arrow-right text-primary me-2"></i>Feature importance visualization</li>
+                    <li class="mb-2"><i class="bi bi-arrow-right text-primary me-2"></i>Form validation with JavaScript</li>
+                    <li class="mb-2"><i class="bi bi-arrow-right text-primary me-2"></i>Responsive Bootstrap 5 UI</li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card feature-card p-4">
+                <h5><i class="bi bi-diagram-3 text-primary me-2"></i>ML Pipeline</h5>
+                <ol class="mt-3">
+                    <li class="mb-2">Load &amp; explore credit card dataset</li>
+                    <li class="mb-2">Clean data &amp; engineer features</li>
+                    <li class="mb-2">Train 4 classification models</li>
+                    <li class="mb-2">Evaluate &amp; compare performance</li>
+                    <li class="mb-2">Select best model (F1 score)</li>
+                    <li class="mb-2">Deploy via Flask web application</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
